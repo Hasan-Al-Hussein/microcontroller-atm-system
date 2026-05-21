@@ -3,7 +3,7 @@
 Microprocessor-based ATM simulation implemented on the FRDM-KL25Z development board using keypad input, UART communication, timeout handling, and transaction validation logic.
 
 <p align="center">
-  <img src="images/atm_system_block_diagram.png" width="950"/>
+  <img src="images/atm_system_block_diagram.png" width="900"/>
 </p>
 
 ---
@@ -13,24 +13,26 @@ Microprocessor-based ATM simulation implemented on the FRDM-KL25Z development bo
 This project implements a simplified ATM system using the FRDM-KL25Z microcontroller platform.
 
 The system supports:
+
 - PIN authentication
 - Keypad-based user input
 - UART terminal communication
 - Withdrawal amount validation
 - Timeout protection
-- Transaction state management
+- Transaction retry handling
 
-The project demonstrates low-level embedded system programming using GPIO, UART peripherals, keypad scanning logic, and finite transaction workflows.
+The project demonstrates low-level embedded systems programming using GPIO interfaces, UART peripherals, keypad scanning logic, and transaction-state management.
 
 ---
 
 # Hardware Interface
 
 <p align="center">
-  <img src="images/keypad_interface.png" width="950"/>
+  <img src="images/keypad_interface.png" width="850"/>
 </p>
 
 The ATM system integrates:
+
 - FRDM-KL25Z development board
 - 4x4 matrix keypad
 - UART serial terminal
@@ -43,22 +45,6 @@ The keypad is used for:
 
 ---
 
-# ATM System Architecture
-
-<p align="center">
-  <img src="images/atm_system_block_diagram.png" width="950"/>
-</p>
-
-The system architecture consists of:
-- GPIO-based keypad interface
-- UART communication module
-- PIN verification logic
-- Timeout monitoring
-- Transaction validation
-- User interaction workflow
-
----
-
 # Keypad Scanning Algorithm
 
 <p align="center">
@@ -66,12 +52,13 @@ The system architecture consists of:
 </p>
 
 The keypad scanning mechanism operates using:
+
 - row-column activation
 - GPIO polling
 - debounce handling
-- timeout-based detection
+- timeout-based key detection
 
-Each row is sequentially driven LOW while column inputs are monitored to identify pressed keys.
+Each keypad row is sequentially driven LOW while the column pins are monitored to detect active key presses.
 
 ---
 
@@ -81,50 +68,48 @@ Each row is sequentially driven LOW while column inputs are monitored to identif
   <img src="images/key_detection_logic.png" width="850"/>
 </p>
 
-The keypad matrix maps:
-- numeric digits
-- function keys
-- transaction control inputs
-
-The system translates row-column combinations into corresponding key values.
+The system translates row-column combinations into corresponding keypad characters used for:
+- PIN validation
+- Withdrawal amount entry
+- User interaction control
 
 ---
 
-# ATM Transaction Logic
+# ATM Transaction Workflow
 
 The ATM workflow performs:
 
 1. Button-triggered transaction start
-2. PIN entry through keypad
+2. PIN entry using keypad input
 3. PIN verification
-4. Withdrawal amount input
+4. Withdrawal amount entry
 5. Balance validation
-6. Transaction confirmation
+6. Transaction confirmation or rejection
 
-The system includes:
+The implementation includes:
 - incorrect PIN handling
 - retry limits
-- timeout detection
+- timeout protection
 - transaction abort logic
 
 ---
 
 # Performance Evaluation
 
-<p align="center">
-  <img src="images/test_plan.png" width="950"/>
-</p>
-
-The system was tested under multiple transaction scenarios.
-
 | Test Scenario | Expected Result |
 |---|---|
 | Correct PIN and withdrawal ≤ 5000 | Transaction success |
 | Correct PIN and withdrawal > 5000 | Insufficient balance |
-| Wrong PIN on first try, correct second | Incorrect Pin → Entered pin is correct |
+| Wrong PIN on first try, correct second | Incorrect Pin. Try again. → Entered pin is correct |
 | Wrong PIN three times | Incorrect Pin. Aborted! |
 | No PIN input within timeout | Timeout!! |
 | No withdrawal input within timeout | Timeout!! |
+
+The system was validated across multiple transaction scenarios to verify:
+- keypad reliability
+- UART communication
+- timeout handling
+- transaction-state correctness
 
 ---
 
@@ -137,7 +122,7 @@ The system was tested under multiple transaction scenarios.
 - Timeout protection
 - Transaction retry logic
 - GPIO peripheral programming
-- Embedded finite-state workflow
+- Embedded transaction workflow
 
 ---
 
@@ -146,18 +131,16 @@ The system was tested under multiple transaction scenarios.
 ```text
 src/
 ├── atm_main.c
-├── keypad_scan.c
-├── uart_driver.c
 └── README.md
 ```
 
 The implementation includes:
-- GPIO configuration
 - UART initialization
+- GPIO configuration
 - keypad scanning logic
 - timeout-based input handling
 - transaction validation
-- embedded ATM workflow control
+- ATM workflow control
 
 ---
 
@@ -215,6 +198,11 @@ The implementation includes:
 
 # Authors
 
+- Hasan Al Hussein
+- Yaman Masad
+- Salaheddine Metnani 
+
+Khalifa University
 - Hasan Al Hussein
 
 Khalifa University
