@@ -2,11 +2,24 @@
 
 Microprocessor-based ATM simulation implemented on the FRDM-KL25Z development board using keypad input, UART communication, timeout handling, and transaction validation logic.
 
+> Embedded systems project focused on GPIO interfacing, keypad scanning, UART feedback, and state-based transaction control on a real microcontroller board.
+
 <p align="center">
   <img src="images/atm_system_block_diagram.png" width="900"/>
 </p>
 
 ---
+
+## Project Snapshot
+
+| Area | Details |
+|---|---|
+| Board | FRDM-KL25Z |
+| Language | C |
+| Input | 4x4 matrix keypad and push button |
+| Output | UART serial terminal |
+| Core logic | PIN validation, balance checks, retry limits, timeout handling |
+| Focus | Low-level embedded control and reliable user interaction |
 
 # Overview
 
@@ -98,9 +111,9 @@ The implementation includes:
 
 | Test Scenario | Expected Result |
 |---|---|
-| Correct PIN and withdrawal ≤ 5000 | Transaction success |
+| Correct PIN and withdrawal <= 5000 | Transaction success |
 | Correct PIN and withdrawal > 5000 | Insufficient balance |
-| Wrong PIN on first try, correct second | Incorrect Pin. Try again. → Entered pin is correct |
+| Wrong PIN on first try, correct second | Retry message, then successful validation |
 | Wrong PIN three times | Incorrect Pin. Aborted! |
 | No PIN input within timeout | Timeout!! |
 | No withdrawal input within timeout | Timeout!! |
@@ -110,6 +123,15 @@ The system was validated across multiple transaction scenarios to verify:
 - UART communication
 - timeout handling
 - transaction-state correctness
+
+---
+
+# Engineering Highlights
+
+- Built a reliable keypad scanner using row-column GPIO polling.
+- Managed user interaction through a finite-state transaction workflow.
+- Added timeout protection so the system does not block indefinitely while waiting for input.
+- Validated edge cases such as invalid PIN attempts, insufficient balance, and aborted transactions.
 
 ---
 
@@ -201,8 +223,5 @@ The implementation includes:
 - Hasan Al Hussein
 - Yaman Masad
 - Salaheddine Metnani 
-
-Khalifa University
-- Hasan Al Hussein
 
 Khalifa University
