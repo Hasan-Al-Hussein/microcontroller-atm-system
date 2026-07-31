@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="assets/repository-banner.svg" width="100%" alt="FRDM-KL25Z microcontroller ATM system" />
+  <br /><br />
+  <a href="https://github.com/Hasan-Al-Hussein"><img src="https://img.shields.io/badge/ENGINEERING_PORTFOLIO-0F172A?style=for-the-badge&logo=github&logoColor=white" alt="Back to Hasan Al Hussein's engineering portfolio" /></a>
+</div>
+
 # Microcontroller ATM System
 
 Microprocessor-based ATM simulation implemented on the FRDM-KL25Z development board using keypad input, UART communication, timeout handling, and transaction validation logic.
